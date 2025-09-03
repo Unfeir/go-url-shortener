@@ -5,10 +5,10 @@ import (
 	"log/slog"
 	"net/http"
 
-	resp "restAPI/internal/lib/api/response"
-	"restAPI/internal/lib/logger/sl"
-	"restAPI/internal/lib/random"
-	"restAPI/internal/storage"
+	resp "url-shortener/internal/lib/api/response"
+	"url-shortener/internal/lib/logger/sl"
+	"url-shortener/internal/lib/random"
+	"url-shortener/internal/storage"
 
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
@@ -69,7 +69,7 @@ func New(log *slog.Logger, urlSaver URLSaver) http.HandlerFunc {
 		id, err := urlSaver.SaveURL(req.URL, alias)
 		if errors.Is(err, storage.ErrURLExists) {
 			log.Info("url already exists", slog.String("url", req.URL))
-			render.JSON(w,r, resp.Error("url already exists"))
+			render.JSON(w, r, resp.Error("url already exists"))
 			return
 		}
 		if err != nil {

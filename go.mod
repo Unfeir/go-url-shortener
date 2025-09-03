@@ -1,4 +1,4 @@
-module restAPI
+module url-shortener
 
 go 1.24.6
 

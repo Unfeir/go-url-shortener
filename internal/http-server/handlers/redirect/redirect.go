@@ -4,14 +4,15 @@ import (
 	"errors"
 	"net/http"
 
+	"log/slog"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
-	"log/slog"
 
-	resp "restAPI/internal/lib/api/response"
-	"restAPI/internal/lib/logger/sl"
-	"restAPI/internal/storage"
+	resp "url-shortener/internal/lib/api/response"
+	"url-shortener/internal/lib/logger/sl"
+	"url-shortener/internal/storage"
 )
 
 // URLGetter is an interface for getting url by alias.
@@ -21,9 +22,8 @@ type URLGetter interface {
 	GetURL(alias string) (string, error)
 }
 
-
 func New(log *slog.Logger, urlGetter URLGetter) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request){
+	return func(w http.ResponseWriter, r *http.Request) {
 		const op = "handlers.redirect.New"
 
 		log = log.With(

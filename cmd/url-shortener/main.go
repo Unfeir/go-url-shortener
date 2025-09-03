@@ -5,13 +5,13 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-	"restAPI/internal/config"
-	"restAPI/internal/http-server/handlers/deleter"
-	"restAPI/internal/http-server/handlers/redirect"
-	"restAPI/internal/http-server/handlers/url/save"
-	mwLogger "restAPI/internal/http-server/middleware/logger"
-	"restAPI/internal/lib/logger/sl"
-	"restAPI/internal/storage/sqlite"
+	"url-shortener/internal/config"
+	"url-shortener/internal/http-server/handlers/deleter"
+	"url-shortener/internal/http-server/handlers/redirect"
+	"url-shortener/internal/http-server/handlers/url/save"
+	mwLogger "url-shortener/internal/http-server/middleware/logger"
+	"url-shortener/internal/lib/logger/sl"
+	"url-shortener/internal/storage/sqlite"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -47,7 +47,6 @@ func main() {
 		log.Error("failed to init storage", sl.Err(err))
 		os.Exit(1)
 	}
-	
 
 	// TODO: init router: chi, "chi render"
 	router := chi.NewRouter()
@@ -73,11 +72,11 @@ func main() {
 
 	// TODO: run server:
 	srv := &http.Server{
-		Addr: cfg.Address,
-		Handler: router,
-		ReadTimeout: cfg.HTTPServer.Timeout,
+		Addr:         cfg.Address,
+		Handler:      router,
+		ReadTimeout:  cfg.HTTPServer.Timeout,
 		WriteTimeout: cfg.HTTPServer.Timeout,
-		IdleTimeout: cfg.HTTPServer.IdleTimeout,
+		IdleTimeout:  cfg.HTTPServer.IdleTimeout,
 	}
 	if err := srv.ListenAndServe(); err != nil {
 		log.Error("failed to start server")
@@ -104,5 +103,3 @@ func setupLogger(env string) *slog.Logger {
 
 	return log
 }
-
-

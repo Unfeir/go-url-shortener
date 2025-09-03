@@ -8,10 +8,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"restAPI/internal/http-server/handlers/redirect"
-	"restAPI/internal/http-server/handlers/redirect/mocks"
-	"restAPI/internal/lib/api"
-	"restAPI/internal/lib/logger/handlers/slogdiscard"
+	"url-shortener/internal/http-server/handlers/redirect"
+	"url-shortener/internal/http-server/handlers/redirect/mocks"
+	"url-shortener/internal/lib/api"
+	"url-shortener/internal/lib/logger/handlers/slogdiscard"
 )
 
 func TestSaveHandler(t *testing.T) {

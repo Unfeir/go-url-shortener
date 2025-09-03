@@ -4,14 +4,15 @@ import (
 	"errors"
 	"net/http"
 
+	"log/slog"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
-	"log/slog"
 
-	resp "restAPI/internal/lib/api/response"
-	"restAPI/internal/lib/logger/sl"
-	"restAPI/internal/storage"
+	resp "url-shortener/internal/lib/api/response"
+	"url-shortener/internal/lib/logger/sl"
+	"url-shortener/internal/storage"
 )
 
 // URLGetter is an interface for getting url by alias.
@@ -51,6 +52,6 @@ func New(log *slog.Logger, urlDeleter URLDeleter) http.HandlerFunc {
 		}
 
 		log.Info("delete url for alias", slog.String("alias", alias))
-		render.NoContent(w,r)
+		render.NoContent(w, r)
 	}
 }
